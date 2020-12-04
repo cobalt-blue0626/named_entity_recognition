@@ -8,11 +8,11 @@ def build_corpus(split, make_vocab=True, data_dir="./ResumeNER"):
 
     word_lists = []
     tag_lists = []
-    with open(join(data_dir, split+".char.bmes"), 'r', encoding='utf-8') as f:
+    with open(join(data_dir, split+"_.txt"), 'r', encoding='utf-8') as f:
         word_list = []
         tag_list = []
         for line in f:
-            if line != '\n':
+            if line != '\n' and line.strip('\n').split()!=[]:
                 word, tag = line.strip('\n').split()
                 word_list.append(word)
                 tag_list.append(tag)
@@ -21,7 +21,7 @@ def build_corpus(split, make_vocab=True, data_dir="./ResumeNER"):
                 tag_lists.append(tag_list)
                 word_list = []
                 tag_list = []
-
+                
     # 如果make_vocab为True，还需要返回word2id和tag2id
     if make_vocab:
         word2id = build_map(word_lists)

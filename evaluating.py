@@ -11,7 +11,6 @@ class Metrics(object):
         # [[t1, t2], [t3, t4]...] --> [t1, t2, t3, t4...]
         self.golden_tags = flatten_lists(golden_tags)
         self.predict_tags = flatten_lists(predict_tags)
-
         if remove_O:  # 将O标记移除，只关心实体标记
             self._remove_Otags()
 
@@ -34,8 +33,11 @@ class Metrics(object):
 
         precision_scores = {}
         for tag in self.tagset:
-            precision_scores[tag] = self.correct_tags_number.get(tag, 0) / \
-                self.predict_tags_counter[tag]
+            print((tag,self.correct_tags_number.get(tag, 0),self.predict_tags_counter[tag]))
+            if self.predict_tags_counter[tag] == 0:
+                precision_scores[tag] = 0
+            else:
+                precision_scores[tag] = self.correct_tags_number.get(tag, 0) / self.predict_tags_counter[tag]
 
         return precision_scores
 
@@ -130,9 +132,9 @@ class Metrics(object):
     def _remove_Otags(self):
 
         length = len(self.golden_tags)
+
         O_tag_indices = [i for i in range(length)
                          if self.golden_tags[i] == 'O']
-
         self.golden_tags = [tag for i, tag in enumerate(self.golden_tags)
                             if i not in O_tag_indices]
 

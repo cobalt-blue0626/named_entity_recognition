@@ -9,14 +9,16 @@ class CRFModel(object):
                  c1=0.1,
                  c2=0.1,
                  max_iterations=100,
-                 all_possible_transitions=False
+                 all_possible_transitions=True,
+                 all_possible_states = True
                  ):
 
         self.model = CRF(algorithm=algorithm,
                          c1=c1,
                          c2=c2,
                          max_iterations=max_iterations,
-                         all_possible_transitions=all_possible_transitions)
+                         all_possible_transitions=all_possible_transitions,
+                         all_possible_states = all_possible_states)
 
     def train(self, sentences, tag_lists):
         features = [sent2features(s) for s in sentences]

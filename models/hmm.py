@@ -27,7 +27,6 @@ class HMM(object):
             word2id: 将字映射为ID
             tag2id: 字典，将标注映射为ID
         """
-
         assert len(tag_lists) == len(word_lists)
 
         # 估计转移概率矩阵
