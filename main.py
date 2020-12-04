@@ -12,8 +12,8 @@ def main():
     print("读取数据...")
     train_word_lists, train_tag_lists, word2id, tag2id = build_corpus("train")
     dev_word_lists, dev_tag_lists = build_corpus("dev", make_vocab=False)
-    test_word_lists, test_tag_lists = build_corpus("test", make_vocab=False)
-    dev_word_lists_, dev_word_lists_raw, article_id = loadDevFile("development_2.txt")
+    #test_word_lists, test_tag_lists = build_corpus("test", make_vocab=False)
+    test_word_lists, test_tag_lists, article_id = loadDevFile("development_2.txt")
     
 
     # # 训练评估ｈｍｍ模型

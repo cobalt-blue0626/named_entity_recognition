@@ -134,10 +134,10 @@ class BILSTM_Model(object):
 
             return val_loss
 
-    def test(self, word_lists, tag_lists, word2id, tag2id):
+    def test(self, word_lists, word2id, tag2id):
         """返回最佳模型在测试集上的预测结果"""
         # 准备数据
-        word_lists, tag_lists, indices = sort_by_lengths(word_lists, tag_lists)
+        word_lists, indices = sort_by_lengths(word_lists)
         tensorized_sents, lengths = tensorized(word_lists, word2id)
         tensorized_sents = tensorized_sents.to(self.device)
 
@@ -166,9 +166,9 @@ class BILSTM_Model(object):
         ind_maps = sorted(list(enumerate(indices)), key=lambda e: e[1])
         indices, _ = list(zip(*ind_maps))
         pred_tag_lists = [pred_tag_lists[i] for i in indices]
-        tag_lists = [tag_lists[i] for i in indices]
+        
 
-        return pred_tag_lists, tag_lists
+        return pred_tag_lists
 
 
 class BiLSTM_CRF(nn.Module):

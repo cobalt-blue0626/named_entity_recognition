@@ -47,17 +47,17 @@ def tensorized(batch, maps):
     return batch_tensor, lengths
 
 
-def sort_by_lengths(word_lists, tag_lists):
-    pairs = list(zip(word_lists, tag_lists))
-    indices = sorted(range(len(pairs)),
-                     key=lambda k: len(pairs[k][0]),
+def sort_by_lengths(word_lists):
+    # pairs = list(zip(word_lists, tag_lists))
+    indices = sorted(range(len(word_lists)),
+                     key=lambda k: len(word_lists[k]),
                      reverse=True)
-    pairs = [pairs[i] for i in indices]
+    word_lists = [word_lists[i] for i in indices]
     # pairs.sort(key=lambda pair: len(pair[0]), reverse=True)
 
-    word_lists, tag_lists = list(zip(*pairs))
+    # word_lists = list(zip(*pairs))
 
-    return word_lists, tag_lists, indices
+    return word_lists, indices
 
 
 def cal_loss(logits, targets, tag2id):
